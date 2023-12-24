@@ -1,6 +1,7 @@
 -- Line Config
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.cmd([[autocmd FileType * set formatoptions-=ro]])
 
 -- Tab Config
 vim.opt.tabstop = 4
