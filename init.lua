@@ -6,6 +6,7 @@ vim.cmd(":set nowrap")
 
 vim.cmd(":set colorcolumn=80")
 
+-- If we're on Windows, use powershell instead of command prompt.
 if string.find(vim.loop.os_uname().sysname, "Windows") then
     vim.opt.shell = "powershell.exe"
 end
