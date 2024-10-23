@@ -30,6 +30,22 @@ local function rust()
     })
 end
 
+local function ts()
+
+    local startcmd = "typescript-language-server"
+
+    if string.find(vim.loop.os_uname().sysname, "Windows") then
+        -- If platform is windows, add `.cmd`
+        startcmd = startcmd .. ".cmd"
+    end
+
+    vim.lsp.start({
+        name = "typescript-language-server",
+        cmd = {startcmd, "--stdio"},
+        root_dir = vim.env.PWD,
+    })
+end
+
 
 return {
     -- args is a table containing info about the FileType event
@@ -41,6 +57,8 @@ return {
             lua()
         elseif args.match == "rust" then
             rust()
+        elseif args.match == "typescript" or args.match == "typescriptreact" or args.match == "typescript.tsx" then
+            ts()
         end
     end,
 }

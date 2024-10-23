@@ -1,4 +1,4 @@
--- Line Config
+-- Line Config 
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.cmd("autocmd FileType * set formatoptions-=ro")
@@ -58,6 +58,10 @@ vim.keymap.set({"i", "s"}, "<C-E>", function()
 end, {silent = true})
 
 -- Treesitter
+local treesitter = require("nvim-treesitter.install")
+if string.find(vim.loop.os_uname().sysname, "Windows") then
+    treesitter.compilers = {"clang"}
+end
 require("treesitter-config")
 
 -- LSP Config
@@ -107,16 +111,13 @@ colorizer.setup()
 
 -- My custom configs
 local lsp_configs = require("lsp_configs")
+vim.lsp.set_log_level("off")
 
 -- Create an event handler for the FileType autocommand
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = {'haskell', 'lua', 'rust'},
+    pattern = {'haskell', 'lua', 'rust', 'typescript', 'typescriptreact', 'typescript.tsx'},
     callback = lsp_configs.startLsp
 })
---vim.api.nvim_create_autocmd('FileType', {
---    pattern = 'lua',
---    callback = lsp_configs.lua
---})
 
 
 vim.diagnostic.config({
