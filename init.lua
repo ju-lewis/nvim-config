@@ -77,6 +77,13 @@ require("treesitter-config")
 
 -- Telescope keybinds
 local ts = require("telescope.builtin")
+require("telescope").setup({
+    defaults = {
+        file_ignore_patterns = {
+            "node_modules", ".git/", "build/", "release/", "target/"
+        }
+    }
+})
 vim.keymap.set({"i", "n"}, "<C-Z>", function () ts.find_files() end )
 
 -- Tab Page Keybinds
@@ -113,10 +120,10 @@ vim.api.nvim_create_autocmd('FileType', {
 
 
 vim.diagnostic.config({
-    virtual_text = false
+    virtual_text = true
 })
 
-require("lsp_lines").setup({})
+--require("lsp_lines").setup({})
 -----------------------------------------------------------------------------------------
 
 
