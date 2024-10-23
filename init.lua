@@ -124,6 +124,8 @@ vim.diagnostic.config({
     virtual_text = true
 })
 
+vim.keymap.set({"n"}, "<C-A>", function() vim.lsp.buf.code_action() end)
+
 --require("lsp_lines").setup({})
 -----------------------------------------------------------------------------------------
 
