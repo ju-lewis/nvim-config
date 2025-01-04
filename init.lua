@@ -1,4 +1,4 @@
--- Line Config 
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.cmd("autocmd FileType * set formatoptions-=ro")
@@ -88,13 +88,13 @@ require("telescope").setup({
         }
     }
 })
-vim.keymap.set({"i", "n"}, "<C-Z>", function () ts.find_files() end )
+vim.keymap.set({"i", "n"}, "<C-P>", function () ts.find_files() end )
 
 -- Tab Page Keybinds
 vim.keymap.set({"n", "i"}, "<C-D>", function () vim.api.nvim_command(":tabnew") end) -- Open new tab
 vim.keymap.set({"n", "i"}, "<C-X>", function () vim.api.nvim_command(":tabclose") end) -- Close current tab
-vim.keymap.set({"n"}, "<C-L>", function () vim.api.nvim_command("+tabnext") end)
-vim.keymap.set({"n"}, "<C-H>", function () vim.api.nvim_command("-tabnext") end)
+vim.keymap.set({"n"}, "<C-L>", function () vim.api.nvim_command(":tabnext") end)
+vim.keymap.set({"n"}, "<C-H>", function () vim.api.nvim_command(":tabprevious") end)
 
 
 -- Lualine
@@ -125,6 +125,7 @@ vim.diagnostic.config({
 })
 
 vim.keymap.set({"n"}, "<C-A>", function() vim.lsp.buf.code_action() end)
+vim.keymap.set({"n"}, "<C-N>", function() vim.diagnostic.open_float() end)
 
 --require("lsp_lines").setup({})
 -----------------------------------------------------------------------------------------
