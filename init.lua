@@ -1,4 +1,15 @@
 
+_=[[
+
+  ___           _ _      _  ___   _____ __  __    ___           __ _      
+ | _ ) ___  ___| ( )___ | \| \ \ / /_ _|  \/  |  / __|___ _ _  / _(_)__ _ 
+ | _ \/ _ \/ _ \ |/(_-< | .` |\ V / | || |\/| | | (__/ _ \ ' \|  _| / _` |
+ |___/\___/\___/_| /__/ |_|\_| \_/ |___|_|  |_|  \___\___/_||_|_| |_\__, |
+                                                                    |___/ 
+
+]]
+
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.cmd("autocmd FileType * set formatoptions-=ro")
@@ -42,7 +53,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
 
 -- Colorscheme
-vim.cmd(":colorscheme catppuccin-macchiato")
+-- vim.cmd(":colorscheme catppuccin-macchiato")
+vim.cmd(":colorscheme gruvbox")
 
 -- Snippet 
 local ls = require("luasnip")
@@ -84,7 +96,12 @@ local ts = require("telescope.builtin")
 require("telescope").setup({
     defaults = {
         file_ignore_patterns = {
-            "node_modules", ".git/", "build/", "release/", "target/"
+            "node_modules",
+            ".git/",
+            "build/",
+            "release/",
+            "target/",
+            ".csv"
         }
     }
 })
@@ -107,7 +124,7 @@ local colorizer = require("colorizer")
 colorizer.setup()
 
 
------------------------------------ LSP CONFIGURATION -----------------------------------
+------------------------------ LSP CONFIGURATION ------------------------------
 
 -- My custom configs
 local lsp_configs = require("lsp_configs")
@@ -128,11 +145,11 @@ vim.keymap.set({"n"}, "<C-A>", function() vim.lsp.buf.code_action() end)
 vim.keymap.set({"n"}, "<C-N>", function() vim.diagnostic.open_float() end)
 
 --require("lsp_lines").setup({})
------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
 
 
------------------------------------- AI INTEGERATION ------------------------------------
+------------------------------- AI INTEGERATION -------------------------------
 
 require("gp").setup({
     providers = {
@@ -168,6 +185,6 @@ require("gp").setup({
     }
 })
 
------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
 
