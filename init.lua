@@ -177,11 +177,21 @@ require("codecompanion").setup({
     strategies = {
         chat = {
             adapter = "gemini"
-            --adapter = "ollama"
+            --adapter = "ollama",
         },
         inline = {
-            adapter = "gemini"
-            --adapter = "ollama"
+            adapter = "gemini",
+            --adapter = "ollama",
+            keymaps = {
+                accept_change = {
+                    modes = { n = "ga" },
+                    description = "Accept the suggested change",
+                },
+                reject_change = {
+                    modes = { n = "gr" },
+                    description = "Reject the suggested change",
+                },
+            },
         }
     }
 })
