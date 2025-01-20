@@ -149,37 +149,24 @@ vim.keymap.set({"n"}, "<C-N>", function() vim.diagnostic.open_float() end)
 
 
 
-------------------------------- AI INTEGERATION -------------------------------
+-------------------------------- AI INTEGRATION -------------------------------
 
-require("gp").setup({
+local gp = require("gp")
+gp._state.chat_agent = "Qwen2.5-Coder 7B Instruct"
+gp.setup({
     providers = {
         ollama = {
+            disable = false,
             endpoint = "http://localhost:11434/v1/chat/completions"
         }
     },
     agents = {
         {
-            name = "CodeGPT4o",
-            disable = true,
-        },
-        {
-            name = "ChatGPT4o-mini",
-            disable = true,
-        },
-        {
-            name = "ChatGPT4o",
-            disable = true,
-        },
-        {
-            name = "CodeGPT4o-mini",
-            disable = true,
-        },
-        {
-            name = "LocalAgent",
+            name = "Qwen2.5-Coder 7B Instruct",
             provider = "ollama",
             chat = true,
             command = true,
-            model = {model = "llama3.1"},
+            model = {model = "qwen2.5-coder"},
             system_prompt = "Answer any query succinctly unless otherwise specified. Don't use triple backticks for coding requests (```) as the code is being entered directly into an editor."
         }
     }
