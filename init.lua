@@ -151,23 +151,37 @@ vim.keymap.set({"n"}, "<C-N>", function() vim.diagnostic.open_float() end)
 
 -------------------------------- AI INTEGRATION -------------------------------
 
-local gp = require("gp")
-gp._state.chat_agent = "Qwen2.5-Coder 7B Instruct"
-gp.setup({
-    providers = {
-        ollama = {
-            disable = false,
-            endpoint = "http://localhost:11434/v1/chat/completions"
-        }
-    },
-    agents = {
-        {
-            name = "Qwen2.5-Coder 7B Instruct",
-            provider = "ollama",
-            chat = true,
-            command = true,
-            model = {model = "qwen2.5-coder"},
-            system_prompt = "Answer any query succinctly unless otherwise specified. Don't use triple backticks for coding requests (```) as the code is being entered directly into an editor."
+--local gp = require("gp")
+--gp._state.chat_agent = "Qwen2.5-Coder 7B Instruct"
+--gp._state.default_command_agent = "Qwen2.5-Coder 7B Instruct"
+--gp.setup({
+--    providers = {
+--        ollama = {
+--            disable = false,
+--            endpoint = "http://localhost:11434/v1/chat/completions"
+--        }
+--    },
+--    agents = {
+--        {
+--            name = "Qwen2.5-Coder 7B Instruct",
+--            provider = "ollama",
+--            chat = true,
+--            command = true,
+--            model = {model = "qwen2.5-coder"},
+--            system_prompt = "Answer any query succinctly unless otherwise specified. Don't use triple backticks for coding requests (```) as the code is being entered directly into an editor."
+--        }
+--    }
+--})
+
+require("codecompanion").setup({
+    strategies = {
+        chat = {
+            adapter = "gemini"
+            --adapter = "ollama"
+        },
+        inline = {
+            adapter = "gemini"
+            --adapter = "ollama"
         }
     }
 })
