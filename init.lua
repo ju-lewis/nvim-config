@@ -175,6 +175,18 @@ vim.keymap.set({"n"}, "<C-N>", function() vim.diagnostic.open_float() end)
 
 require("codecompanion").setup({
     strategies = {
+        adapters = {
+            -- Modify Gemini adapter to use Flash 2.0 Experimental :3
+            gemini = function ()
+                return require("codecompanion.adapters").extend("gemini", {
+                    schema = {
+                        model = {
+                            default = "gemini-2.0-flash-exp"
+                        }
+                    }
+                })
+            end,
+        },
         chat = {
             adapter = "gemini"
             --adapter = "ollama",
