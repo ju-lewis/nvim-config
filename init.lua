@@ -6,11 +6,11 @@ _=[[
  | _ \/ _ \/ _ \ |/(_-< | .` |\ V / | || |\/| | | (__/ _ \ ' \|  _| / _` |
  |___/\___/\___/_| /__/ |_|\_| \_/ |___|_|  |_|  \___\___/_||_|_| |_\__, |
                                                                     |___/ 
-
 ]]
 
 
 vim.opt.number = true
+vim.opt.cursorline = true
 vim.opt.relativenumber = true
 vim.cmd("autocmd FileType * set formatoptions-=ro")
 vim.cmd(":set nowrap")
