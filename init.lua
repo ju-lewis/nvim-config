@@ -53,8 +53,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
 
 -- Colorscheme
--- vim.cmd(":colorscheme catppuccin-macchiato")
-vim.cmd(":colorscheme gruvbox")
+vim.cmd(":colorscheme catppuccin-mocha")
 
 -- Snippet 
 local ls = require("luasnip")
