@@ -131,7 +131,7 @@ vim.lsp.set_log_level("off")
 
 -- Create an event handler for the FileType autocommand
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = {'haskell', 'lua', 'rust', 'typescript', 'typescriptreact', 'typescript.tsx'},
+    pattern = {'haskell', 'lua', 'rust', 'typescript', 'typescriptreact', 'typescript.tsx', 'javascript'},
     callback = lsp_configs.startLsp
 })
 

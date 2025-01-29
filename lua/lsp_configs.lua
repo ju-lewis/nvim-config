@@ -22,6 +22,13 @@ local function lua()
     })
 end
 
+local function js()
+    vim.lsp.start({
+        name = "quick-lint-js",
+        cmd = {"quick-lint-js", "--lsp"},
+    })
+end
+
 local function rust()
     vim.lsp.start({
         name = "rust-analyzer",
@@ -59,6 +66,8 @@ return {
             rust()
         elseif args.match == "typescript" or args.match == "typescriptreact" or args.match == "typescript.tsx" then
             ts()
+        elseif args.match == "javascript" then
+            js()
         end
     end,
 }
