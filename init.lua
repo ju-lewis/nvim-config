@@ -100,7 +100,9 @@ require("telescope").setup({
             "build/",
             "release/",
             "target/",
-            ".csv"
+            ".csv",
+            ".o",
+            ".hi"
         }
     }
 })
