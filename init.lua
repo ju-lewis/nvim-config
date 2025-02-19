@@ -95,14 +95,15 @@ local ts = require("telescope.builtin")
 require("telescope").setup({
     defaults = {
         file_ignore_patterns = {
-            "node_modules",
-            ".git/",
-            "build/",
-            "release/",
-            "target/",
-            ".csv",
-            ".o",
-            ".hi"
+            "node%_modules",
+            "%.git",
+            "build",
+            "release",
+            "target",
+            "%.csv",
+            "%.o",
+            "%.hi",
+            "cache"
         }
     }
 })
