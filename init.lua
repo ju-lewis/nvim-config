@@ -114,12 +114,6 @@ colorizer.setup()
 ------------------------------ LSP CONFIGURATION ------------------------------
 
 -- My custom configs
---local lsp_configs = require("lsp_configs")
--- Create an event handler for the FileType autocommand
---vim.api.nvim_create_autocmd('FileType', {
---    pattern = {'haskell', 'lua', 'rust', 'typescript', 'typescriptreact', 'typescript.tsx', 'javascript'},
---    callback = lsp_configs.startLsp
---})
 
 local lspconfig = require("lspconfig")
 
