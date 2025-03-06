@@ -75,21 +75,6 @@ if string.find(vim.loop.os_uname().sysname, "Windows") then
 end
 require("treesitter-config")
 
--- LSP Config
---local lsp_zero = require('lsp-zero')
---lsp_zero.on_attach(function(client, bufnr)
---	lsp_zero.default_keymaps({buffer = bufnr})
---end)
---
---require("mason").setup({})
---require("mason-lspconfig").setup({
---	ensure_installed = {'rust_analyzer', 'lua_ls', 'pyright', 'tsserver', 'hls'},
---	handlers = {
---		lsp_zero.default_setup,
---	}
---})
-
-
 -- Telescope keybinds
 local ts = require("telescope.builtin")
 require("telescope").setup({
@@ -129,16 +114,36 @@ colorizer.setup()
 ------------------------------ LSP CONFIGURATION ------------------------------
 
 -- My custom configs
-local lsp_configs = require("lsp_configs")
-vim.lsp.set_log_level("off")
-
+--local lsp_configs = require("lsp_configs")
 -- Create an event handler for the FileType autocommand
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = {'haskell', 'lua', 'rust', 'typescript', 'typescriptreact', 'typescript.tsx', 'javascript'},
-    callback = lsp_configs.startLsp
-})
+--vim.api.nvim_create_autocmd('FileType', {
+--    pattern = {'haskell', 'lua', 'rust', 'typescript', 'typescriptreact', 'typescript.tsx', 'javascript'},
+--    callback = lsp_configs.startLsp
+--})
+
+local lspconfig = require("lspconfig")
 
 
+-- LSP setups
+lspconfig.lua_ls.setup {
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' }
+            }
+        }
+    }
+}
+lspconfig.rust_analyzer.setup {}
+lspconfig.hls.setup {}
+lspconfig.quick_lint_js.setup {}
+lspconfig.ts_ls.setup {}
+
+
+
+
+
+vim.lsp.set_log_level("off")
 vim.diagnostic.config({
     virtual_text = true
 })
