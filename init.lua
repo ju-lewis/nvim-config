@@ -53,8 +53,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
 
 -- Colorscheme
-vim.cmd(":colorscheme catppuccin-mocha")
-
+--vim.cmd(":colorscheme catppuccin-mocha")
+vim.cmd(":colorscheme gruvbox")
 -- Snippet 
 local ls = require("luasnip")
 -- Shift-Tab to open snippet menu
@@ -86,9 +86,10 @@ require("telescope").setup({
             "release",
             "target",
             "%.csv",
-            "%.o",
+            --"%.o",
             "%.hi",
-            "cache"
+            --"cache",
+            "vendored"
         }
     }
 })
@@ -107,19 +108,18 @@ lualine.setup({})
 
 
 -- Colorizer
-local colorizer = require("colorizer")
-colorizer.setup()
+--local colorizer = require("colorizer")
+--colorizer.setup()
 
 
 ------------------------------ LSP CONFIGURATION ------------------------------
 
 -- My custom configs
 
-local lspconfig = require("lspconfig")
+--local lspconfig = require("lspconfig")
+local pid = vim.fn.getpid()
 
-
--- LSP setups
-lspconfig.lua_ls.setup {
+vim.lsp.config("lua_ls", {
     settings = {
         Lua = {
             diagnostics = {
@@ -127,14 +127,43 @@ lspconfig.lua_ls.setup {
             }
         }
     }
-}
-lspconfig.rust_analyzer.setup {}
-lspconfig.hls.setup {}
-lspconfig.quick_lint_js.setup {}
-lspconfig.ts_ls.setup {}
+})
 
 
 
+-- LSP setups
+vim.lsp.config("rust_analyzer", {})
+vim.lsp.config("hls", {})
+vim.lsp.config("quick_lint_js", {})
+vim.lsp.config("ts_ls", {})
+vim.lsp.config("pyright", {})
+vim.lsp.config("clangd", {})
+vim.lsp.config("omnisharp", {
+    cmd = {
+        "dotnet",
+        vim.fn.expand("~/.local/share/omnisharp/OmniSharp.dll"),
+        "--languageserver",
+        "--hostPID",
+        tostring(pid),
+    },
+    enable_editorconfig_support = true,
+    enable_roslyn_analyzers = true,
+    organize_imports_on_format = true,
+    enable_import_completion = true,
+    --capabilities = require("cmp_nvim_lsp").default_capabilities(),
+    --handlers = {
+    --  ["textDocument/definition"] = require("omnisharp_extended").handler,
+    --},
+})
+
+vim.lsp.enable("lua_ls")
+vim.lsp.enable("rust_analyzer")
+vim.lsp.enable("hls")
+vim.lsp.enable("quick_lint_js")
+vim.lsp.enable("ts_ls")
+vim.lsp.enable("pyright")
+vim.lsp.enable("clangd")
+vim.lsp.enable("omnisharp")
 
 
 vim.lsp.set_log_level("off")
@@ -152,40 +181,40 @@ vim.keymap.set({"n"}, "<C-N>", function() vim.diagnostic.open_float() end)
 
 -------------------------------- AI INTEGRATION -------------------------------
 
-require("codecompanion").setup({
-    strategies = {
-        adapters = {
-            -- Modify Gemini adapter to use Flash 2.0 Experimental :3
-            gemini = function ()
-                return require("codecompanion.adapters").extend("gemini", {
-                    schema = {
-                        model = {
-                            default = "gemini-2.0-flash-exp"
-                        }
-                    }
-                })
-            end,
-        },
-        chat = {
-            adapter = "gemini"
-            --adapter = "ollama",
-        },
-        inline = {
-            adapter = "gemini",
-            --adapter = "ollama",
-            keymaps = {
-                accept_change = {
-                    modes = { n = "ga" },
-                    description = "Accept the suggested change",
-                },
-                reject_change = {
-                    modes = { n = "gr" },
-                    description = "Reject the suggested change",
-                },
-            },
-        }
-    }
-})
+--require("codecompanion").setup({
+--    adapters = {
+--        gemini = function ()
+--            return require("codecompanion.adapters").extend("gemini", {
+--                schema = {
+--                    model = {
+--                        default = "gemini-2.5-flash"
+--                        --default = "gemini-2.5-pro"
+--                    }
+--                }
+--            })
+--        end,
+--    },
+--    strategies = {
+--        chat = {
+--            adapter = "gemini"
+--            --adapter = "ollama",
+--        },
+--        inline = {
+--            adapter = "gemini",
+--            --adapter = "ollama",
+--            keymaps = {
+--                accept_change = {
+--                    modes = { n = "ga" },
+--                    description = "Accept the suggested change",
+--                },
+--                reject_change = {
+--                    modes = { n = "gr" },
+--                    description = "Reject the suggested change",
+--                },
+--            },
+--        }
+--    }
+--})
 
 -------------------------------------------------------------------------------
 
