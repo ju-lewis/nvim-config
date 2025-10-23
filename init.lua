@@ -181,40 +181,42 @@ vim.keymap.set({"n"}, "<C-N>", function() vim.diagnostic.open_float() end)
 
 -------------------------------- AI INTEGRATION -------------------------------
 
---require("codecompanion").setup({
---    adapters = {
---        gemini = function ()
---            return require("codecompanion.adapters").extend("gemini", {
---                schema = {
---                    model = {
---                        default = "gemini-2.5-flash"
---                        --default = "gemini-2.5-pro"
---                    }
---                }
---            })
---        end,
---    },
---    strategies = {
---        chat = {
---            adapter = "gemini"
---            --adapter = "ollama",
---        },
---        inline = {
---            adapter = "gemini",
---            --adapter = "ollama",
---            keymaps = {
---                accept_change = {
---                    modes = { n = "ga" },
---                    description = "Accept the suggested change",
---                },
---                reject_change = {
---                    modes = { n = "gr" },
---                    description = "Reject the suggested change",
---                },
---            },
---        }
---    }
---})
+require("codecompanion").setup({
+    adapters = {
+        http = {
+            gemini = function ()
+                return require("codecompanion.adapters").extend("gemini", {
+                    schema = {
+                        model = {
+                            default = "gemini-2.5-flash"
+                            --default = "gemini-2.5-pro"
+                        }
+                    }
+                })
+            end,
+        }
+    },
+    strategies = {
+        chat = {
+            adapter = "gemini"
+            --adapter = "ollama",
+        },
+        inline = {
+            adapter = "gemini",
+            --adapter = "ollama",
+            keymaps = {
+                accept_change = {
+                    modes = { n = "ga" },
+                    description = "Accept the suggested change",
+                },
+                reject_change = {
+                    modes = { n = "gr" },
+                    description = "Reject the suggested change",
+                },
+            },
+        }
+    }
+})
 
 -------------------------------------------------------------------------------
 
